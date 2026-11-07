@@ -10,7 +10,7 @@ import { UserContext } from '../contexts/UserContext';
 let NavBar = () => {
 
 const {totalCart} = useContext(CartContext)
-const {token, setToken} = useContext(UserContext)
+const {token, setToken, logout} = useContext(UserContext)
 
     return(
         <>  
@@ -28,7 +28,7 @@ const {token, setToken} = useContext(UserContext)
                     {token
                     ?<>
                         <Nav.Link as={Link} to="/profile">🔓Profile</Nav.Link>
-                        <Nav.Link as={Link} to="/" onClick={() => setToken(false)}>🔒Logout</Nav.Link>
+                        <Nav.Link as={Link} to="/" onClick={logout}>🔒Logout</Nav.Link>
                     </>
                     :<>
                         <Nav.Link as={Link} to="/login">🔐Login</Nav.Link>

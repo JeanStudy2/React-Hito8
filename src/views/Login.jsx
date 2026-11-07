@@ -1,38 +1,28 @@
-import { useState } from 'react';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import NavBar from '../components/Navbar';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 
 let Login = () =>{
 
-    let [correo, setCorreo] = useState('')
-    let [contraseña, setContraseña] = useState('')
+  const {email, setEmail, password, setPassword, login} = useContext(UserContext)
 
-    let pageDefault = (e) =>{
-      e.preventDefault()
-
-      if (contraseña.length >= 6){
-        alert('Inicio de sesion exitoso')
-        setCorreo('')
-        setContraseña('')
-      }else{
-        alert('La contraseña debe tener minimo 6 caracteres')
-      }
-    }
 
     return(
         <>
           <div className='bg-dark'>
             <NavBar/>
-            <Form className='w-50 mx-auto py-4' onSubmit={pageDefault}>
-            <h2 className='text-center text-light'>Inicio de Sesion</h2>
+            <Form className='w-50 mx-auto py-4' onSubmit={(e)=>login(e)}>
+            <h2 className='text-center text-light my-4'>Inicio de Sesion</h2>
                 <Form.Group className="mb-3 text-light" controlId="formBasicEmail">
                   <Form.Label>Correo Electronico</Form.Label>
-                  <Form.Control type="email" placeholder="correo@dominio.com" value={correo} onChange={(e)=> setCorreo(e.target.value)} required />
+                  <Form.Control type="email" placeholder="correo@dominio.com" value={email} onChange={(e)=> setEmail(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3 text-light" controlId="formBasicPassword">
                   <Form.Label>Contraseña</Form.Label>
-                  <Form.Control type="password" placeholder="********" value={contraseña} onChange={(e) => setContraseña(e.target.value)} required/>
+                  <Form.Control type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </Form.Group>
                 <div className='text-center'>
                   <Button variant="success" type="submit" >Iniciar Sesion</Button>
